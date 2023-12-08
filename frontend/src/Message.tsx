@@ -47,6 +47,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
           
         }}
       >
+        <strong style={{ margin: 0, width: '100%',  }}>{message.username}</strong> {/* Paragraph full width */}
         <p style={{ margin: 0, width: '100%' }}>{message.content}</p> {/* Paragraph full width */}
         <p style={{ margin: 0, width: '100%', color:'lightgrey' }}>{convertTo12HrFormat(message.time)}</p> {/* Paragraph full width */}
     </div>
