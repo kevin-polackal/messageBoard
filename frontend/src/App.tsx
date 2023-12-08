@@ -167,7 +167,7 @@ function App() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Grid>
-        <Grid item>
+        <Grid item gap={10}>
           <Button variant="contained" onClick={handleExistingUser}>Login</Button>
           <Button variant="contained" onClick={handleNewUser}>Create New User</Button>
         </Grid>
