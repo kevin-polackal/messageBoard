@@ -1,4 +1,13 @@
+# Startup Instructions
+**Download Docker**: Go to the Docker [Website](https://www.docker.com/products/docker-desktop/) and download Docker Desktop for your operating system (Windows, macOS, or Linux).
 
+**Install Docker**: Run the installer and follow the on-screen instructions to install Docker Desktop on your system.
+
+You can verify the installation has succeeded by running `docker --version` and `docker-compose --version`
+
+To run the application, in the terminal navigate to the project directory and run `docker-compose up --build`
+
+The app will be available on [localhost:3000](http://localhost:3000/)
 
 # Global Message Board
 Welcome to the global message board! This is a place where people can come together and exchange ideas and thoughts with people across the world. A user is first met with a login screen where they must create a profile before being able to post to the board. From there a user is free to post what they like, and anything with profanities will be censored.
