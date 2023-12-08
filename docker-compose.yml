@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+  backend:
+    build: ./backend
+    ports:
+      - "8001:4000"
+    volumes:
+      - ./backend:/usr/src/app
+      - sqlite-data:/usr/src/app/db
+volumes:
+  sqlite-data:
