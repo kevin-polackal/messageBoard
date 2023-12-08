@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import {TextField,Button,Container,Grid} from '@mui/material';
 
 import './App.css';
 import {MessageDto} from './MessageDto';
 import Message from './Message'
 
+// To represent a message
 interface IMessage {
   content: string;
   timestamp: string; 
@@ -13,13 +13,23 @@ interface IMessage {
 }
 
 function App() {
+  //Track state of the message input
   const [input, setInput] = useState<string>("");
+
+  //Track all the messages
   const [messages, setMessages] = useState<Array<MessageDto>>(new Array<MessageDto>());
+
+  //Track the current username
   const [username, setUsername] = useState<string>("");
+
+  //Track the current password
   const [password, setPassword] = useState<string>("");
+
+  //Track if user is currently logged in
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
 
+  //To stream real-time view of Messages in database
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:8001/stream');
 
@@ -35,11 +45,14 @@ function App() {
     };
   }, []);
 
+
   const handleLogOut = () => {
     setIsLoggedIn(false);
     setPassword("");
     setUsername("");
   }
+
+  //Entering a new user
   const handleNewUser = async () => {
     if (!username.trim() || !password.trim()) {
       alert("Username and password are required.");
@@ -66,6 +79,7 @@ function App() {
     }
   };
 
+  //Logging in an existing user
   const handleExistingUser = async () => {
     if (!username.trim() || !password.trim()) {
       alert("Username and password are required.");
@@ -93,17 +107,18 @@ function App() {
   };
   
 
-
+  //format time at click of post button in hours, minutes, seconds
   const formatTime = (currentdate: Date) => {
     return currentdate.getHours() + ":"  
     + currentdate.getMinutes() + ":" 
     + currentdate.getSeconds();
   }
 
+  //Add the message to the database, check for profanity
   const handleSendMessage = async () => {
     if(input !== "") {
       const url = `https://api.api-ninjas.com/v1/profanityfilter?text=${encodeURIComponent(input)}`;
-      const apiKey = process.env.REACT_APP_X_API_KEY || 'default-api-key'; // Use REACT_APP_ prefix
+      const apiKey = process.env.REACT_APP_X_API_KEY || 'default-api-key';
       console.log('API Key:', apiKey);
       try {
         const response = await fetch(url, {
@@ -133,6 +148,7 @@ function App() {
     setInput("");
   }
 
+ //Login screen shown before a user can access the message board
   const loginForm = (
     <Container>
       <Grid container spacing={2} direction="column" alignItems="center" justifyContent="center" style={{minHeight: '100vh'}}>
@@ -159,7 +175,7 @@ function App() {
     </Container>
   );
   
-
+// messageBoard UI
   return (
     <div className="App">
     {!isLoggedIn ? (
